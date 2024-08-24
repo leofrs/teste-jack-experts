@@ -15,7 +15,7 @@ export default function HomePage() {
 
       <CardHome />
 
-      <div className=" w-16 h-16 flex items-center justify-center absolute right-16 bottom-16 rounded-lg bg-[#DD7F10]">
+      <div className="w-16 h-16 flex items-center justify-center absolute right-16 bottom-16 rounded-lg bg-[#DD7F10]">
         <button className="text-center text-white font-bold">+</button>
       </div>
     </main>
