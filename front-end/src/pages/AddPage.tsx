@@ -10,7 +10,7 @@ export default function AddPage() {
   };
   return (
     <main className="p-16">
-      <div className="w-full border border-red-400 h-16 mb-2 flex justify-between items-center px-2 cursor-pointer">
+      <div className="w-full  h-16 mb-2 flex justify-between items-center px-2 cursor-pointer">
         <button
           onClick={() => handleClick()}
           className="flex items-center gap-2"
@@ -21,7 +21,7 @@ export default function AddPage() {
 
         <h3>Add Page</h3>
       </div>
-      <div className="w-full h-auto border border-blue-400 h-64 flex flex-col items-center">
+      <div className="w-full border border-blue-400 h-64 flex flex-col items-center">
         <FormAddTasks />
       </div>
     </main>

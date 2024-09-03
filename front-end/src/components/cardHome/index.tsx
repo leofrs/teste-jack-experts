@@ -17,7 +17,7 @@ export default function CardHome() {
     navigate("/todoJack-add");
   };
   return (
-    <div className="flex justify-between flex-wrap w-full h-full border border-[#DD7F10] px-8 gap-2">
+    <div className="flex justify-between flex-wrap w-full h-[580px] px-8 gap-2 overflow-y-scroll">
       {cardsItems.map((item) => (
         <div
           key={item.id}
@@ -51,29 +51,21 @@ export default function CardHome() {
               )}
             </div>
 
-            <div className="w-full h-full flex flex-col gap-8 pt-6">
+            <div className="w-full h-full flex flex-col gap-8 pt-6 overflow-y-scroll">
               <div className="w-full flex gap-6 px-6">
-                <input type="checkbox" name="" id="" placeholder="" />
-                <p>Fazer Comida</p>
+                <input
+                  type="checkbox"
+                  placeholder="checkbox"
+                  className="accent-emerald-500/25"
+                />
+                <p className="cursor-default">Fazer Comida</p>
                 <div className="flex gap-2 items-center">
-                  <FaRegEdit />
-                  <AiOutlineDelete />
-                </div>
-              </div>
-              <div className="w-full flex gap-6 px-6">
-                <input type="checkbox" name="" id="" placeholder="" />
-                <p>Fazer Comida</p>
-                <div className="flex gap-2 items-center">
-                  <FaRegEdit />
-                  <AiOutlineDelete />
-                </div>
-              </div>
-              <div className="w-full flex gap-6 px-6">
-                <input type="checkbox" name="" id="" placeholder="" />
-                <p>Fazer Comida</p>
-                <div className="flex gap-2 items-center">
-                  <FaRegEdit />
-                  <AiOutlineDelete />
+                  <button type="button">
+                    <FaRegEdit />
+                  </button>
+                  <button type="button">
+                    <AiOutlineDelete />
+                  </button>
                 </div>
               </div>
             </div>
