@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 
-import { PrismaQuery } from "../services/prisma.services";
+import { PrismaUser } from "../services/prisma.services";
 import { BcryptUtil } from "../utils/bcrypt.utils";
 import jwt from "jsonwebtoken";
+import { SECRET_KEY } from "../middleware/auth";
 
-const JWT_SECRET = "159";
-
-const prismaQuery = new PrismaQuery();
+const prismaQuery = new PrismaUser();
 const bcryptUtil = new BcryptUtil();
 
 export type UserLogin = {
@@ -79,24 +78,11 @@ export class UserControllers {
         return res.status(401).json({ error: "Senha inválida!" });
       }
 
-      const token = jwt.sign({ userId: findUser.id }, JWT_SECRET, {
+      const token = jwt.sign({ userId: findUser.id }, SECRET_KEY, {
         expiresIn: "1h",
       });
 
-      res.json({ token });
-    } catch (error: any) {
-      res.status(500).json({ Error: `Error interno encontrado: ${error}` });
-    }
-  }
-
-  async getAllusers(req: Request, res: Response) {
-    try {
-      const getAll = await prismaQuery.getAllUsersPrisma();
-      if (!getAll) {
-        res.status(200).json({ Sucesso: "Lista de usúarios vazia" });
-      } else {
-        res.status(200).json(getAll);
-      }
+      res.json({ findUser, token: token });
     } catch (error: any) {
       res.status(500).json({ Error: `Error interno encontrado: ${error}` });
     }

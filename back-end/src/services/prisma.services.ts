@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { UserLogin, UserRegister } from "../controllers/User.Controller";
+import { TaskInformations } from "../controllers/Tasks.Controller";
 
 const prisma = new PrismaClient();
 
@@ -9,7 +9,7 @@ type UserRegisterWithHash = {
   hashPassword: string;
 };
 
-export class PrismaQuery {
+export class PrismaUser {
   userRegister = async ({
     name,
     email,
@@ -43,18 +43,42 @@ export class PrismaQuery {
       await prisma.$disconnect();
     }
   };
+}
 
-  getAllUsersPrisma = async () => {
+export class PrismaTask {
+  async createTask({ title, descricao, authorId }: TaskInformations) {
+    if (typeof authorId !== "number" || authorId <= 0) {
+      throw new Error("Invalid authorId");
+    }
     try {
-      const getAll = await prisma.user.findMany();
-      return getAll;
+      const create = await prisma.tarefas.create({
+        data: {
+          title: title,
+          descricao: descricao,
+          author: {
+            connect: { id: authorId },
+          },
+        },
+      });
+      return create;
+    } catch (error) {
+      console.error("Error ao criar tarefa vindo do prima Service:", error);
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+
+  async getAllTask() {
+    try {
+      const findAll = await prisma.tarefas.findMany();
+      return findAll;
     } catch (error) {
       console.error(
-        "Error ao buscar todos os usúarios vindo do prima Service:",
+        "Error ao buscar as tarefas vindo do prima Service:",
         error
       );
     } finally {
       await prisma.$disconnect();
     }
-  };
+  }
 }
