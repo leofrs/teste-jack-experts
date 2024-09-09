@@ -5,11 +5,10 @@ type Inputs = {
   descricao: string;
 };
 
-export default function FormAdd() {
+export default function FormUpdateTask() {
   const {
     register,
     handleSubmit,
-    /* watch, */
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -21,7 +20,6 @@ export default function FormAdd() {
         Adicione a sua categoria
       </h4>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        {/* register your input into the hook by invoking the "register" function */}
         <input
           {...register("title", { required: true })}
           className="border border-gray-400 p-2"

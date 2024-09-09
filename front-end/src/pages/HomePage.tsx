@@ -1,41 +1,38 @@
-//import { useNavigate } from "react-router-dom";
-import CardHome from "../components/cardHome";
-
-import { FaRegMoon } from "react-icons/fa";
-// import { IoSunnyOutline } from "react-icons/io5";
-
-import ModalAdd from "../components/modalAdd";
-import { useState } from "react";
-import FormAdd from "../components/formAdd";
+import ImageBg from "../assets/bg-image.png";
 
 export default function HomePage() {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
-  /* 
-  }; */
   return (
-    <main className="p-16">
-      <div className="flex justify-between items-center w-full h-auto px-8 mb-8 cursor-default">
-        <h1 className="text-4xl font-bold">Todo List</h1>
-        <p className="cursor-pointer">
-          <FaRegMoon />
-        </p>
+    <main className="p-16 w-full h-screen flex">
+      <div className="w-2/4 h-full flex flex-col items-center justify-center">
+        <div className="flex flex-col gap-8">
+          <h1 className="text-3xl font-bold">
+            TO-DO <span>LIST</span>
+          </h1>
+          <p className="italic">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Blanditiis, quae obcaecati, voluptatem inventore sint harum repellat
+            commodi eum dicta natus amet, labore aliquid necessitatibus ab totam
+            possimus eaque corrupti provident?
+          </p>
+        </div>
+
+        <div className="mt-16 w-full flex justify-evenly">
+          <button
+            type="button"
+            className="border border-gray-500 rounded-full px-8 py-2"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            className="border border-gray-500 rounded-full px-8 py-2"
+          >
+            Cadastre-se
+          </button>
+        </div>
       </div>
-
-      <CardHome />
-
-      <ModalAdd isOpen={isModalOpen} onClose={closeModal}>
-        <FormAdd />
-      </ModalAdd>
-
-      <div
-        className="w-16 h-16 flex items-center justify-center absolute right-16 bottom-14 rounded-lg bg-[#f38545] cursor-pointer"
-        onClick={openModal}
-      >
-        <button className="text-center text-white font-bold">+</button>
+      <div className="w-2/4 flex flex-col justify-center">
+        <img src={ImageBg} alt="to-do image" />
       </div>
     </main>
   );
