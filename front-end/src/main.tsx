@@ -1,11 +1,13 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { RouterProvider } from "react-router-dom";
-import { routerIndex } from "./routes/index.tsx";
 import { UserProvider } from "./context/userContext.tsx";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <UserProvider>
-    <RouterProvider router={routerIndex} />
-  </UserProvider>
+  <BrowserRouter>
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </BrowserRouter>
 );

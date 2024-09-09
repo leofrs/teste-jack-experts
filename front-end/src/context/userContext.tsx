@@ -9,10 +9,18 @@ interface UserContextType {
   setUserRegister: (user: boolean) => void;
 }
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+const defaultUserContext: UserContextType = {
+  user: null,
+  setUser: () => {},
+  userLogin: false,
+  setUserLogin: () => {},
+  userRegister: false,
+  setUserRegister: () => {},
+};
+const UserContext = createContext(defaultUserContext);
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<string | null>("null");
   const [userLogin, setUserLogin] = useState<boolean>(false);
   const [userRegister, setUserRegister] = useState<boolean>(false);
 

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { UserContext } from "./context/userContext";
 
-import HomeTaskPage from "./pages/HomeTaskPage";
-import HomePage from "./pages/HomePage";
+import { PrivateRouter } from "./routes/private.routes";
+import { PublicRouter } from "./routes/public.routes";
 
 function App() {
   const context = useContext(UserContext);
@@ -12,7 +12,7 @@ function App() {
   }
 
   const { user } = context;
-  return <>{user ? <HomeTaskPage /> : <HomePage />}</>;
+  return <>{user ? <PrivateRouter /> : <PublicRouter />}</>;
 }
 
 export default App;

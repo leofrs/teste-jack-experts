@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function HomeTaskPage() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/toDo-jack-add");
+    navigate("/toDo-add-task");
   };
 
   return (

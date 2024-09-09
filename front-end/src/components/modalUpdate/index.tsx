@@ -7,13 +7,11 @@ interface ModalProps {
 export default function ModalAdd({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null;
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Fecha o modal quando o backdrop é clicado
+  const handleBackdropClick = () => {
     onClose();
   };
 
   const handleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Previne a propagação do clique para o backdrop
     e.stopPropagation();
   };
 
