@@ -1,38 +1,47 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface UserContextType {
   user: string | null;
   setUser: (user: string | null) => void;
-  userLogin: boolean;
-  setUserLogin: (user: boolean) => void;
-  userRegister: boolean;
-  setUserRegister: (user: boolean) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (user: boolean) => void;
+  navigate: NavigateFunction;
 }
 
 const defaultUserContext: UserContextType = {
   user: null,
   setUser: () => {},
-  userLogin: false,
-  setUserLogin: () => {},
-  userRegister: false,
-  setUserRegister: () => {},
+
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
+  navigate: () => {},
 };
 const UserContext = createContext(defaultUserContext);
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<string | null>("null");
-  const [userLogin, setUserLogin] = useState<boolean>(false);
-  const [userRegister, setUserRegister] = useState<boolean>(false);
+  const [user, setUser] = useState<string | null>(null);
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   return (
     <UserContext.Provider
       value={{
         user,
         setUser,
-        userLogin,
-        setUserLogin,
-        userRegister,
-        setUserRegister,
+        isAuthenticated,
+        setIsAuthenticated,
+        navigate,
       }}
     >
       {children}

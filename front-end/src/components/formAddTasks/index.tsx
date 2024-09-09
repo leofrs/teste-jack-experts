@@ -1,4 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { TasksApi } from "../../api/tasks";
+import { useNavigate } from "react-router-dom";
 
 type Inputs = {
   title: string;
@@ -12,7 +14,22 @@ export default function FormAddTasks() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const taskApi = new TasksApi();
+  const navigate = useNavigate();
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const create = await taskApi.createTask(data.title, data.descricao);
+
+      if (create) {
+        alert("Tarefa criada com sucesso");
+        navigate("/toDo-homeTasks");
+      } else {
+        alert("Algo de errado aconteceu! Tente novamente");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
 
   return (
     <div className="w-[350px] h-96 rounded  border border-[#f38545] p-8">
@@ -29,7 +46,7 @@ export default function FormAddTasks() {
         <input
           {...register("descricao")}
           className="border border-gray-400 p-2"
-          placeholder="Insira a descrição aqui"
+          placeholder="Insira a descrição aqui (opcional)"
         />
 
         <input

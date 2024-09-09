@@ -1,14 +1,11 @@
-import { useNavigate } from "react-router-dom";
-
 import { MdOutlineArrowRight } from "react-icons/md";
 import RegisterForm from "../components/registerForm";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 
 export default function RegisterPage() {
-  const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { setUserLogin, setUserRegister } = context;
+  const { navigate } = context;
 
   const handleClick = () => {
     navigate("/toDo-login");
@@ -16,8 +13,6 @@ export default function RegisterPage() {
 
   const handleClickHome = () => {
     navigate("/");
-    setUserLogin(false);
-    setUserRegister(false);
   };
   return (
     <main className="p-16">

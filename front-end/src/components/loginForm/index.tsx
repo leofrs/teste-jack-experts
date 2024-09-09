@@ -1,4 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+
+import { useNavigate } from "react-router-dom";
 
 type Inputs = {
   email: string;
@@ -12,7 +16,39 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const context = useContext(UserContext);
+  const { setUser, setIsAuthenticated } = context;
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await fetch("http://localhost:3001/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+
+      if (result.token) {
+        localStorage.setItem("token", result.token);
+        setUser(data.email);
+        setIsAuthenticated(true);
+        navigate("/toDo-homeTasks", { replace: true });
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
 
   return (
     <div className="w-[350px] h-96 rounded  border border-[#f38545] p-8">

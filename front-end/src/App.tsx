@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "./context/userContext";
 
-import { PrivateRouter } from "./routes/private.routes";
-import { PublicRouter } from "./routes/public.routes";
+import { RouterIndex } from "./routes/index.routes";
 
 function App() {
   const context = useContext(UserContext);
@@ -11,8 +10,7 @@ function App() {
     throw new Error("ExampleComponent must be used within a UserProvider");
   }
 
-  const { user } = context;
-  return <>{user ? <PrivateRouter /> : <PublicRouter />}</>;
+  return <RouterIndex />;
 }
 
 export default App;

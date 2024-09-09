@@ -1,24 +1,18 @@
 import LoginForm from "../components/loginForm";
 
-import { useNavigate } from "react-router-dom";
-
 import { MdOutlineArrowRight } from "react-icons/md";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 
 export default function LoginPage() {
-  const navigate = useNavigate();
-
   const context = useContext(UserContext);
-  const { setUserLogin, setUserRegister } = context;
+  const { navigate } = context;
 
   const handleClickRegister = () => {
     navigate("/toDo-register");
   };
   const handleClickHome = () => {
     navigate("/");
-    setUserLogin(false);
-    setUserRegister(false);
   };
 
   return (
