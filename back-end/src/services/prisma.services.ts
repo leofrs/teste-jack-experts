@@ -43,6 +43,20 @@ export class PrismaUser {
       await prisma.$disconnect();
     }
   };
+
+  finAllUSers = async () => {
+    try {
+      const findUnique = await prisma.user.findMany();
+      return findUnique;
+    } catch (error) {
+      console.error(
+        "Error ao buscar todos os usuarios vindo do prima Service:",
+        error
+      );
+    } finally {
+      await prisma.$disconnect();
+    }
+  };
 }
 
 export class PrismaTask {
@@ -75,6 +89,58 @@ export class PrismaTask {
     } catch (error) {
       console.error(
         "Error ao buscar as tarefas vindo do prima Service:",
+        error
+      );
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+
+  async editById(id: number, title: string, descricao: string) {
+    try {
+      const edit = await prisma.tarefas.update({
+        where: {
+          id: id,
+        },
+        data: {
+          title: title,
+          descricao: descricao,
+        },
+      });
+      return edit;
+    } catch (error) {
+      console.error("Error ao editar a tarefa vindo do prima Service:", error);
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+
+  async deleteById(id: number) {
+    try {
+      const del = await prisma.tarefas.delete({
+        where: {
+          id: id,
+        },
+      });
+      return del;
+    } catch (error) {
+      console.error("Error ao excluir a tarefa vindo do prima Service:", error);
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+
+  async getTaskId(id: number) {
+    try {
+      const getById = await prisma.tarefas.findUnique({
+        where: {
+          id: id,
+        },
+      });
+      return getById;
+    } catch (error) {
+      console.error(
+        "Error ao buscar uma tarefa vindo do prima Service:",
         error
       );
     } finally {

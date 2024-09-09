@@ -87,4 +87,17 @@ export class UserControllers {
       res.status(500).json({ Error: `Error interno encontrado: ${error}` });
     }
   }
+
+  async findAllUsers(req: Request, res: Response) {
+    try {
+      const getAll = prismaQuery.finAllUSers();
+      if (getAll) {
+        res.status(200).json(getAll);
+      } else {
+        res.status(200).json("Nenhum usuario cadastrado");
+      }
+    } catch (error) {
+      res.status(501).json({ Error: `Erro interno encontrado: ${error}` });
+    }
+  }
 }

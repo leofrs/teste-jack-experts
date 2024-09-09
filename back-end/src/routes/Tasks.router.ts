@@ -11,4 +11,26 @@ tasksRouter.post(
   tasksController.createTask
 );
 
-tasksRouter.get("/api/auth/home/get-all-tasks", auth);
+tasksRouter.get(
+  "/api/auth/home/get-all-tasks",
+  auth,
+  tasksController.getAllTasks
+);
+
+tasksRouter.post(
+  "/api/auth/task/edit-task",
+  auth,
+  tasksController.editTaskById
+);
+
+tasksRouter.get(
+  "/api/auth/task/get-task/:id",
+  auth,
+  tasksController.getTaskById
+);
+
+tasksRouter.delete(
+  "/api/auth/task/delete-task/:id",
+  auth,
+  tasksController.deleteTaskById
+);

@@ -6,3 +6,5 @@ const userControllers = new UserControllers();
 
 userRouter.post("/api/user/register", userControllers.register);
 userRouter.post("/api/user/login", userControllers.login);
+
+userRouter.get("/api/getAllUsers", userControllers.findAllUsers);
