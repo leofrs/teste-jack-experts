@@ -7,8 +7,8 @@ export default function HomePage() {
   const { navigate } = context;
 
   const DefaultPage = () => (
-    <div className="flex flex-col gap-8">
-      <h1 className="text-3xl font-bold">
+    <div className="flex flex-col gap-8 flex-wrap">
+      <h1 className="text-3xl font-bold max-sm:text-center">
         TO-DO <span>LIST</span>
       </h1>
       <p className="italic">
@@ -38,10 +38,10 @@ export default function HomePage() {
 
   return (
     <main className="p-16 w-full h-screen flex">
-      <div className="w-2/4 h-full flex flex-col items-center justify-center">
+      <div className="w-2/4 h-full flex flex-col items-center justify-center max-sm:w-full">
         <DefaultPage />
       </div>
-      <div className="w-2/4 flex flex-col justify-center">
+      <div className="w-2/4 flex flex-col justify-center max-sm:hidden">
         <img src={ImageBg} alt="to-do image" />
       </div>
     </main>

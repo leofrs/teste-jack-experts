@@ -6,7 +6,7 @@ import FormAddTasks from "../components/formAddTasks";
 export default function AddPage() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/");
+    navigate("/toDo-homeTasks");
   };
 
   return (

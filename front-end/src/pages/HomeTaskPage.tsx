@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import CardHome from "../components/cardHome";
 
-import { FaRegMoon } from "react-icons/fa";
-
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 
@@ -20,12 +18,9 @@ export default function HomeTaskPage() {
     navigate("/");
   };
   return (
-    <main className="p-16">
-      <div className="flex justify-between items-center w-full h-auto px-8 mb-8 cursor-default">
+    <main className="p-16 max-sm:p-8">
+      <div className="flex flex-wrap justify-between items-center w-full h-auto px-8 mb-8 cursor-default  max-sm:justify-center max-sm:gap-4">
         <h1 className="text-4xl font-bold">Todo List</h1>
-        <p className="cursor-pointer">
-          <FaRegMoon />
-        </p>
         <button
           type="button"
           onClick={() => handleLogout()}
@@ -38,7 +33,7 @@ export default function HomeTaskPage() {
       <CardHome />
 
       <div
-        className="w-16 h-16 flex items-center justify-center absolute right-16 bottom-14 rounded-lg bg-[#f38545] cursor-pointer"
+        className="w-16 h-16 flex items-center justify-center absolute right-16 bottom-14 max-sm:bottom-3 max-sm:right-8 rounded-lg bg-[#f38545] cursor-pointer"
         onClick={() => handleClick()}
       >
         <button className="text-center text-white font-bold">+</button>
