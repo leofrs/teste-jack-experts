@@ -32,21 +32,23 @@ export class TasksController {
     }
   }
 
-  async getAllTasks(req: Request, res: Response) {
+  async getAllTasks(req: CustomRequest, res: Response) {
     try {
-      const getall = await prismaTask.getAllTask();
+      const userId = req.token?.userId;
 
-      if (!getall) {
-        res
-          .status(200)
-          .json({ Sucesso: "Nenhuma tarefa foi encontrada no banco de dados" });
+      if (!userId) {
+        return res.status(401).json({ error: "Usuário não autenticado" });
+      }
+
+      const tasks = await prismaTask.getAllTask(userId);
+
+      if (tasks && tasks.length > 0) {
+        res.status(200).json(tasks);
       } else {
-        res.status(200).json(getall);
+        res.status(404).json({ message: "Nenhuma tarefa encontrada" });
       }
     } catch (error) {
-      res
-        .status(501)
-        .json({ Error: `Um erro interno foi detectado: ${error}` });
+      res.status(500).json({ Error: `Erro interno encontrado: ${error}` });
     }
   }
 

@@ -90,14 +90,14 @@ export class UserControllers {
 
   async findAllUsers(req: Request, res: Response) {
     try {
-      const getAll = prismaQuery.finAllUSers();
-      if (getAll) {
+      const getAll = await prismaQuery.findAllUsers();
+      if (getAll.length > 0) {
         res.status(200).json(getAll);
       } else {
-        res.status(200).json("Nenhum usuario cadastrado");
+        res.status(404).json({ message: "Nenhum usuário cadastrado" }); // Status 404 para não encontrado
       }
     } catch (error) {
-      res.status(501).json({ Error: `Erro interno encontrado: ${error}` });
+      res.status(500).json({ Error: `Erro interno encontrado: ${error}` }); // Corrigido o status para 500 e acessa a mensagem do erro
     }
   }
 }

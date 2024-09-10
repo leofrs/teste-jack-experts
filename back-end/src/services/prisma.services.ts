@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import { TaskInformations } from "../controllers/Tasks.Controller";
 
 const prisma = new PrismaClient();
@@ -44,15 +44,16 @@ export class PrismaUser {
     }
   };
 
-  finAllUSers = async () => {
+  findAllUsers = async (): Promise<User[]> => {
     try {
-      const findUnique = await prisma.user.findMany();
-      return findUnique;
+      const users = await prisma.user.findMany();
+      return users;
     } catch (error) {
       console.error(
-        "Error ao buscar todos os usuarios vindo do prima Service:",
+        "Error ao buscar todos os usuários no Prisma Service:",
         error
       );
+      throw error;
     } finally {
       await prisma.$disconnect();
     }
@@ -82,9 +83,13 @@ export class PrismaTask {
     }
   }
 
-  async getAllTask() {
+  async getAllTask(userId: number) {
     try {
-      const findAll = await prisma.tarefas.findMany();
+      const findAll = await prisma.tarefas.findMany({
+        where: {
+          authorId: userId,
+        },
+      });
       return findAll;
     } catch (error) {
       console.error(
