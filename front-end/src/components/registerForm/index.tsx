@@ -1,4 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { UserApi } from "../../api/user";
+import { useNavigate } from "react-router-dom";
 
 type Inputs = {
   name: string;
@@ -13,7 +15,30 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const userApi = new UserApi();
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await userApi.register(
+        data.email,
+        data.email,
+        data.password
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+
+      if (result) {
+        navigate("/toDo-login", { replace: true });
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
 
   return (
     <div className="w-[350px] h-96 rounded  border border-[#f38545] p-8">

@@ -14,6 +14,7 @@ export default function HomeTaskPage() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    sessionStorage.clear();
     setUser(null);
     navigate("/");
   };

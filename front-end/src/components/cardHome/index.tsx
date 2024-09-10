@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ModalAdd from "../modalUpdate";
 import FormUpdateTask from "../formUpdate";
 import { FaRegEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { TasksApi } from "../../api/tasks";
+import { UserContext } from "../../context/userContext";
 
 export default function CardHome() {
+  const context = useContext(UserContext);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  const { tasks, setTasks } = context;
   const [loading, setLoading] = useState(true);
   const [taskToEdit, setTaskToEdit] = useState(null);
   const taskApi = new TasksApi();

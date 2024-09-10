@@ -4,13 +4,12 @@ import { UserContext } from "../context/userContext";
 
 export default function HomePage() {
   const context = useContext(UserContext);
+  const { user } = context;
   const { navigate } = context;
 
   const DefaultPage = () => (
     <div className="flex flex-col gap-8 flex-wrap">
-      <h1 className="text-3xl font-bold max-sm:text-center">
-        TO-DO <span>LIST</span>
-      </h1>
+      <h1 className="text-3xl font-bold max-sm:text-center">TO-DO LIST</h1>
       <p className="italic">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
         quae obcaecati, voluptatem inventore sint harum repellat commodi eum
