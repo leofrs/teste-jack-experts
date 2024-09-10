@@ -2,6 +2,7 @@ import React, { createContext, useState, ReactNode, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface Task {
+  descricao: string;
   id: number;
   name: string;
   title: string;

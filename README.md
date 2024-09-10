@@ -1,5 +1,9 @@
 # Desafio: Aplicação de Gerenciamento de Tarefas
 
+![Tela principal](/images/1.png)
+![Tela Tasks](/images/2.png)
+![Tela tasks marcada concluída](/images/3.png)
+
 ## Descrição
 
 Este projeto é uma aplicação web simples para gerenciamento de tarefas, que permite aos usuários criar, visualizar, atualizar e excluir tarefas. A aplicação conta com autenticação e autorização, garantindo que apenas usuários autenticados possam acessar e gerenciar suas tarefas.

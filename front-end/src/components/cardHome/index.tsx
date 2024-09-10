@@ -6,12 +6,19 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { TasksApi } from "../../api/tasks";
 import { UserContext } from "../../context/userContext";
 
+interface Task {
+  id: number;
+  title: string;
+  descricao?: string;
+  isChecked: boolean;
+}
+
 export default function CardHome() {
   const context = useContext(UserContext);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const { tasks, setTasks } = context;
-  const [loading, setLoading] = useState(true);
-  const [taskToEdit, setTaskToEdit] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
   const taskApi = new TasksApi();
 
   const handleEditClick = async (id: number) => {
@@ -37,18 +44,16 @@ export default function CardHome() {
     async function fetchTasks() {
       try {
         const tasksFromApi = await taskApi.getAllTasks();
-        const tasksWithState = tasksFromApi.map((task: any) => ({
+        const tasksWithState: Task[] = tasksFromApi.map((task: Task) => ({
           ...task,
           isChecked: false,
         }));
 
         const savedTasks = localStorage.getItem("tasks");
         if (savedTasks) {
-          const parsedSavedTasks = JSON.parse(savedTasks);
+          const parsedSavedTasks: Task[] = JSON.parse(savedTasks);
           tasksWithState.forEach((task) => {
-            const savedTask = parsedSavedTasks.find(
-              (t: any) => t.id === task.id
-            );
+            const savedTask = parsedSavedTasks.find((t) => t.id === task.id);
             if (savedTask) {
               task.isChecked = savedTask.isChecked;
             }
@@ -64,7 +69,7 @@ export default function CardHome() {
     }
 
     fetchTasks();
-  }, [taskApi]);
+  }, [taskApi, setTasks]);
 
   const handleCheckboxChange = (id: number) => {
     const updatedTasks = tasks.map((task) =>
