@@ -19,6 +19,7 @@ Este projeto é uma aplicação web simples para gerenciamento de tarefas, que p
 
 ### Backend
 
+- **Linguagem:** TypeScript
 - **Tecnologia:** Node.js
 - **Framework:** Express.js e Prisma ORM
 - **Banco de Dados:** SQLite
@@ -26,6 +27,7 @@ Este projeto é uma aplicação web simples para gerenciamento de tarefas, que p
 
 ### Frontend
 
+- **Linguagem:** TypeScript
 - **Tecnologia:** React
 - **Gerenciamento de Estado:** React Hooks(useState, useEffect) e Context API
 - **Roteamento:** React Router Dom
